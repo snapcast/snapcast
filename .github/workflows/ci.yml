@@ -108,7 +108,7 @@ jobs:
           - sanitizer: tsan
             param: "TSAN=ON"
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - uses: actions/checkout@v7
@@ -119,7 +119,7 @@ jobs:
           sudo apt-get update && \
           sudo apt-get install -yq libasound2-dev libsoxr-dev libvorbisidec-dev libvorbis-dev libflac-dev \
           libopus-dev alsa-utils libpulse-dev libavahi-client-dev libssl-dev \
-          avahi-daemon ccache expat catch2 \
+          avahi-daemon ccache expat \
           libpipewire-0.3-dev
       - name: cache boost
         id: cache-boost
@@ -377,7 +377,7 @@ jobs:
       - name: dependencies
         run: |
           brew update-if-needed
-          brew install libsoxr flac libvorbis opus catch2 boost
+          brew install libsoxr flac libvorbis opus boost
       - name: configure
         run: |
           cmake -S . -B build \
@@ -427,7 +427,7 @@ jobs:
           cd c:\vcpkg
           git pull
           vcpkg.exe update
-          vcpkg.exe --triplet x64-windows install libflac libvorbis soxr opus openssl boost-asio boost-beast catch2
+          vcpkg.exe --triplet x64-windows install libflac libvorbis soxr opus openssl boost-asio boost-beast
       - name: configure
         run: |
           echo vcpkg installation root: ${env:VCPKG_INSTALLATION_ROOT}
