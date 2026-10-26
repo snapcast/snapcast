@@ -5,7 +5,7 @@ on:
   pull_request:
 
 env:
-  BOOST_VERSION: 1_90_0
+  BOOST_VERSION: 1_92_0
 
 jobs:
   static-analysis:
@@ -17,7 +17,7 @@ jobs:
           - cppcheck
           - clang-tidy
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - uses: actions/checkout@v7
@@ -69,7 +69,7 @@ jobs:
     strategy:
       fail-fast: false
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - uses: actions/checkout@v7
@@ -174,11 +174,15 @@ jobs:
           - clang-16
           - clang-17
           - clang-18
+          - clang-20
+          - clang-21
+          - clang-22
           - gcc-10
           - gcc-11
           - gcc-12
           - gcc-13
           - gcc-14
+          - gcc-15
         build_type:
           - Debug
           - Release
@@ -207,6 +211,18 @@ jobs:
             cc: clang-18
             cxx: clang++-18
             os: ubuntu-24.04
+          - compiler: clang-20
+            cc: clang-20
+            cxx: clang++-20
+            os: ubuntu-26.04
+          - compiler: clang-21
+            cc: clang-21
+            cxx: clang++-21
+            os: ubuntu-26.04
+          - compiler: clang-22
+            cc: clang-22
+            cxx: clang++-22
+            os: ubuntu-26.04
           - compiler: gcc-10
             cc: gcc-10
             cxx: g++-10
@@ -222,11 +238,15 @@ jobs:
           - compiler: gcc-13
             cc: gcc-13
             cxx: g++-13
-            os: ubuntu-24.04
+            os: ubuntu-26.04
           - compiler: gcc-14
             cc: gcc-14
             cxx: g++-14
-            os: ubuntu-24.04
+            os: ubuntu-26.04
+          - compiler: gcc-15
+            cc: gcc-15
+            cxx: g++-15
+            os: ubuntu-26.04
 
     runs-on: ${{ matrix.os }}
 
@@ -304,6 +324,11 @@ jobs:
           - "16.4"
           - "26.0"
           - "26.1"
+          - "26.2"
+          - "26.3"
+          - "26.4"
+          - "26.5"
+          - "26.6"
         build_type:
           - Debug
           - Release
@@ -329,9 +354,19 @@ jobs:
           - xcode: "16.4"
             os: macos-15
           - xcode: "26.0"
-            os: macos-15
+            os: macos-26
           - xcode: "26.1"
-            os: macos-15
+            os: macos-26
+          - xcode: "26.2"
+            os: macos-26
+          - xcode: "26.3"
+            os: macos-26
+          - xcode: "26.4"
+            os: macos-26
+          - xcode: "26.5"
+            os: macos-26
+          - xcode: "26.6"
+            os: macos-26
 
     runs-on: ${{ matrix.os }}
 

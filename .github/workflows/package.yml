@@ -8,13 +8,13 @@ permissions:
   contents: write
 
 env:
-  BOOST_VERSION: 1_90_0
+  BOOST_VERSION: 1_92_0
   SNAPWEB_VERSION: v0.9.2
 
 jobs:
 
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     name: Create release
     outputs:
       tag: ${{ steps.draft_release.outputs.tag }}
@@ -58,9 +58,9 @@ jobs:
           - arch: "amd64"
             os: ubuntu-latest
             image_prefix: "debian:"
-          - arch: "armhf"
-            os: self-hosted-rpi4
-            image_prefix: "badaix/raspios-lite:"
+          # - arch: "armhf"
+          #   os: self-hosted-rpi4
+          #   image_prefix: "badaix/raspios-lite:"
           - arch: "arm64"
             os: self-hosted-rpi5
             image_prefix: "badaix/raspios-lite:"

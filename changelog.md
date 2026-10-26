@@ -9,6 +9,8 @@
 ### General
 
 - Add `SECURITY.md` for vulnerability reporting (Issue #1561)
+- Update Github actions (PR #1534, #1536)
+- Add more compilers in CI, remove ARM32 package builds (unsupported by Github)
 
 ### Contributors
 
