@@ -7,7 +7,7 @@ if(NOT Catch2_FOUND)
   FetchContent_Declare(
     Catch2
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG v3.6.0 # or a later release
+    GIT_TAG v3.16.1 # or a later release
   )
 
   FetchContent_MakeAvailable(Catch2)
