@@ -290,7 +290,7 @@ jobs:
         run: |
           cmake -S . -B build \
             -DWERROR=ON -DBUILD_TESTS=ON \
-            -DBOOST_ROOT=boost_${BOOST_VERSION} \
+            -DBOOST_ROOT=$GITHUB_WORKSPACE/boost_${BOOST_VERSION} \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
             -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE \
