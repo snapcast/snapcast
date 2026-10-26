@@ -1,0 +1,14 @@
+ARG VARIANT="26.04"
+FROM ubuntu:${VARIANT}
+
+# [Optional] Uncomment this section to install additional packages.
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends \
+    git build-essential cmake cmake-format ccache ninja-build python3-autopep8 clang-format \
+    alsa-utils avahi-daemon libasound2-dev libavahi-client-dev libexpat1-dev \
+    libflac-dev libjack-dev libopus-dev libpulse-dev libsoxr-dev libssl-dev libvorbis-dev \
+    libpipewire-0.3-dev libvorbisidec-dev ca-certificates wget
+
+RUN useradd -rm -d /home/vscode -s /bin/bash -g root -u 1001 vscode
+USER vscode
+WORKDIR /home/vscode
