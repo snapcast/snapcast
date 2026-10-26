@@ -1,5 +1,21 @@
 # Snapcast changelog
 
+## Version 0.36.0
+
+### Features
+
+### Bugfixes
+
+### General
+
+- Add `SECURITY.md` for vulnerability reporting (Issue #1561)
+
+### Contributors
+
+- @badaix
+
+_Johannes Pohl <snapcast@badaix.de>  Thu 31 Dec 2026 00:13:37 +0200_
+
 ## Version 0.35.0
 
 ### Features
@@ -32,8 +48,6 @@
 - @olorin
 
 _Johannes Pohl <snapcast@badaix.de>  Sun, 08 Mar 2026 00:13:37 +0200_
-
-# Snapcast changelog
 
 ## Version 0.34.0
 
