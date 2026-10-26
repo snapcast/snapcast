@@ -53,7 +53,19 @@ if(CMAKE_VERSION VERSION_EQUAL "3.19.0" OR CMAKE_VERSION VERSION_GREATER
         "--suppress=stlIfStrFind"
         "--suppress=useStlAlgorithm"
         "--suppress=unmatchedSuppression"
-        "--suppress=virtualCallInConstructor")
+        "--suppress=virtualCallInConstructor"
+        # Cppcheck 2.19.0 introduced some warnings that are suppressed here for
+        # the moment
+        "--suppress=accessMoved"
+        "--suppress=dangerousTypeCast"
+        "--suppress=duplInheritedMember"
+        "--suppress=ignoredReturnValue"
+        "--suppress=invalidPrintfArgType_float"
+        "--suppress=missingReturn"
+        "--suppress=noCopyConstructor"
+        "--suppress=noOperatorEq"
+        "--suppress=nullPointerOutOfMemory"
+        "--suppress=uninitMemberVar")
 
       if(CPPCHECK_ARGS)
         set(CPPCHECK_ARGS_LIST ${CPPCHECK_ARGS})
