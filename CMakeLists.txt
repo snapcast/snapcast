@@ -127,6 +127,7 @@ option(BUILD_WITH_PULSE "Build with PulseAudio support" OFF)
 option(BUILD_WITH_JACK "Build with JACK support" OFF)
 option(BUILD_WITH_PIPEWIRE "Build with PipeWire support" OFF)
 option(BUILD_WITH_SDL2 "Build with SDL2 support" OFF)
+option(BUILD_WITH_SOXR "Build with SOXR resampling support" ON)
 
 if(NOT BUILD_SHARED_LIBS AND NOT BUILD_STATIC_LIBS)
   message(
@@ -276,15 +277,10 @@ if(NOT WIN32 AND NOT ANDROID)
 
   endif()
 
-  option(BUILD_WITH_SOXR "Build with SOXR resampling support" ON)
   if(BUILD_WITH_SOXR)
     pkg_search_module(SOXR REQUIRED soxr)
-  endif()
-  if(SOXR_FOUND)
     add_compile_definitions(HAS_SOXR)
-  else()
-    message(STATUS "soxr not found")
-  endif(SOXR_FOUND)
+  endif()
 
   if(BUILD_WITH_FLAC)
     pkg_search_module(FLAC REQUIRED flac)

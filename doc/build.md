@@ -96,6 +96,8 @@ Other flags that can be passed to `cmake`:
 - `-DBUILD_WITH_PULSE=<ON|OFF>`: build client with PulseAudio support: yes or no (default `OFF`)
 - `-DBUILD_WITH_JACK=<ON|OFF>`: build with JACK support: yes or no (default `OFF`)
 - `-DBUILD_WITH_PIPEWIRE=<ON|OFF>`: build with PipeWire support: yes or no (default `OFF`)
+- `-BUILD_WITH_SDL2=<ON|OFF>`: build with SDL2 support: yes or no (default `OFF`)
+- `-BUILD_WITH_SOXR=<ON|OFF>`: build with SOXR resampling support: yes or no (default `ON`)
 
 ```sh
 cmake .. -DBOOST_ROOT=/path/to/boost_1_8x_0

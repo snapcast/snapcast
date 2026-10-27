@@ -15,12 +15,14 @@
 - CI: remove armhf package builds (unsupported by Github)
 - CI: remove Debian Bullseye from package builds
 - Update SDL2 documentation (PR #1562)
+- CMake: add an explicit `BUILD_WITH_SOXR` option (PR #1543)
 
 ### Contributors
 
 - @badaix
 - @rwsalie
 - @malkstar
+- @mirko
 
 _Johannes Pohl <snapcast@badaix.de>  Thu 31 Dec 2026 00:13:37 +0200_
 
