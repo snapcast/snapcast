@@ -6,6 +6,8 @@
 
 ### Bugfixes
 
+- Fix crash when removing the last stream (Issue #1559, PR #1560)
+
 ### General
 
 - Add snapserver support for OpenBSD (PR #1549)
@@ -23,6 +25,7 @@
 - @rwsalie
 - @malkstar
 - @mirko
+- @NaturalDevCR
 
 _Johannes Pohl <snapcast@badaix.de>  Thu 31 Dec 2026 00:13:37 +0200_
 
