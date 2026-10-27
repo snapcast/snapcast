@@ -8,6 +8,7 @@
 
 ### General
 
+- Add snapserver support for OpenBSD (PR #1549)
 - Add `SECURITY.md` for vulnerability reporting (Issue #1561)
 - Update Github actions (PR #1534, #1536)
 - Add more compilers in CI, remove ARM32 package builds (unsupported by Github)
@@ -15,6 +16,7 @@
 ### Contributors
 
 - @badaix
+- @rwsalie
 
 _Johannes Pohl <snapcast@badaix.de>  Thu 31 Dec 2026 00:13:37 +0200_
 
