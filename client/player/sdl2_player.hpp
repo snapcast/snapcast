@@ -38,7 +38,11 @@ static constexpr auto SDL2 = "sdl2";
 /// SDL2 Audio Player
 /**
  * Audio player implementation using SDL2
- * Based on moonlight-tv's approach to webOS audio streaming
+ * Based on moonlight-tv's approach to SDL2 audio streaming
+ *
+ * SDL2's audio API exposes no playback position or latency information, so a
+ * constant latency is assumed: this is a fallback backend for platforms without
+ * a native low level audio API, where timing is less precise.
  */
 class Sdl2Player : public Player
 {

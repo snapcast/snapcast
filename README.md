@@ -123,7 +123,7 @@ Available audio backends are configured using the `--player` command line parame
 | opensl    | Android | OpenSL ES | |
 | coreaudio | macOS   | Core Audio | |
 | wasapi    | Windows | Windows Audio Session API | |
-| sld2      | All     | SDL2 Audio (e.g. for LG webOS TVs) | |
+| sdl2      | All     | SDL2 Audio (fallback, assumes constant latency) | |
 | file      | All     | Write audio to file | `filename=<filename>` (`<filename>` = `stdout`, `stderr`, `null` or a filename)<br>`mode=[w\|a]` (`w`: write (discarding the content), `a`: append (keeping the content) |
 
 Parameters are appended to the player name, e.g. `--player alsa:buffer_time=100`. Use `--player <name>:?` to get a list of available options.  
