@@ -58,9 +58,6 @@ jobs:
           - arch: "amd64"
             os: ubuntu-latest
             image_prefix: "debian:"
-          # - arch: "armhf"
-          #   os: self-hosted-rpi4
-          #   image_prefix: "badaix/raspios-lite:"
           - arch: "arm64"
             os: self-hosted-rpi5
             image_prefix: "badaix/raspios-lite:"
