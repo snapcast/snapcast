@@ -47,7 +47,7 @@ jobs:
       fail-fast: false
       matrix:
         debian:
-          - bullseye
+          # - bullseye
           - bookworm
           - trixie
         arch:
@@ -56,7 +56,7 @@ jobs:
           - arm64
         include:
           - arch: "amd64"
-            os: ubuntu-latest
+            os: ubuntu-26.04
             image_prefix: "debian:"
           # - arch: "armhf"
           #   os: self-hosted-rpi4

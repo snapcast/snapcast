@@ -11,12 +11,16 @@
 - Add snapserver support for OpenBSD (PR #1549)
 - Add `SECURITY.md` for vulnerability reporting (Issue #1561)
 - Update Github actions (PR #1534, #1536)
-- Add more compilers in CI, remove ARM32 package builds (unsupported by Github)
+- CI: add more compilers
+- CI: remove armhf package builds (unsupported by Github)
+- CI: remove Debian Bullseye from package builds
+- Update SDL2 documentation (PR #1562)
 
 ### Contributors
 
 - @badaix
 - @rwsalie
+- @malkstar
 
 _Johannes Pohl <snapcast@badaix.de>  Thu 31 Dec 2026 00:13:37 +0200_
 
