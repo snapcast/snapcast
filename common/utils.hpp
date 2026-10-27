@@ -42,10 +42,10 @@
 #include <sys/sysinfo.h>
 #endif
 #ifdef OPENBSD
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <net/if_dl.h>
 #include <ifaddrs.h>
+#include <net/if_dl.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 #endif
 #ifdef MACOS
 #include <IOKit/IOCFPlugIn.h>
@@ -360,7 +360,7 @@ static std::string getMacAddress(int sock)
                     }
                 }
 #else
-                success  = 1;
+                success = 1;
                 break;
 #endif
             }
