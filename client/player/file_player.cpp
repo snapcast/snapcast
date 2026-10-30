@@ -86,6 +86,7 @@ FilePlayer::FilePlayer(boost::asio::io_context& io_context, const ClientSettings
 FilePlayer::~FilePlayer()
 {
     LOG(DEBUG, LOG_TAG) << "Destructor\n";
+    *alive_ = false;
     stop(); // NOLINT
 }
 
@@ -130,9 +131,9 @@ void FilePlayer::loop()
         next_request_ = now + 1ms;
 
     timer_.expires_at(next_request_);
-    timer_.async_wait([this](boost::system::error_code ec)
+    timer_.async_wait([this, alive = alive_](boost::system::error_code ec)
     {
-        if (ec)
+        if (ec || !*alive)
             return;
         requestAudio();
     });
