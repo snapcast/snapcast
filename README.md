@@ -17,7 +17,11 @@ Snapcast is a multiroom client-server audio player, where all clients are time s
 Audio is captured by the server and routed to the connected clients. Several players can feed audio to the server in parallel and clients can be grouped to play the same audio stream.  
 One of the most generic ways to use Snapcast is in conjunction with the music player daemon ([MPD](http://www.musicpd.org/)) or [Mopidy](https://www.mopidy.com/).
 
-![Overview](doc/Overview.png)
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="doc/Overview_dark.png">
+ <source media="(prefers-color-scheme: light)" srcset="doc/Overview.png">
+ <img alt="Snapcast" src="doc/Overview.png">
+</picture>
 
 ## How does it work
 
