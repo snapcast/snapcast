@@ -56,6 +56,8 @@ private:
     void send_next();
 
     tcp::socket socket_;
+    std::string peer_;
+    std::string local_;
     boost::asio::streambuf streambuf_;
     boost::asio::strand<boost::asio::any_io_executor> strand_;
     std::deque<std::string> messages_;
