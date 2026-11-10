@@ -33,6 +33,13 @@ TimeProvider::TimeProvider() : diffToServer_(0)
 }
 
 
+void TimeProvider::reset()
+{
+    diffBuffer_.clear();
+    diffToServer_ = 0;
+}
+
+
 void TimeProvider::setDiff(const tv& c2s, const tv& s2c)
 {
     //	tv latency = c2s - s2c;
