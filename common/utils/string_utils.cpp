@@ -30,6 +30,7 @@
 #include <cstdio>
 #include <iomanip>
 #include <map>
+#include <openssl/crypto.h>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -275,14 +276,10 @@ std::string tolower_copy(const std::string& s)
 
 bool timing_safe_equals(const std::string a, const std::string b)
 {
-    volatile size_t i = 0;
-    volatile char result = (a.length() == b.length()) ? 0x00 : 0x01;
-    while (i < b.length())
-    {
-        result |= b[i] ^ (i < a.length() ? a[i] : 0x01);
-        ++i;
+    if (a.length() != b.length()) {
+        return false;
     }
-    return (result == 0);
+    return CRYPTO_memcmp(a.data(), b.data(), a.size()) == 0;
 }
 
 
