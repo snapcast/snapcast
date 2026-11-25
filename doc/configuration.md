@@ -181,7 +181,7 @@ tcp://<listen IP, e.g. 127.0.0.1>:<port>?name=<name>[&mode=server]
 
 default for `port` (if omitted) is 4953, default for `mode` is `server`
 
-Mopidy configuration would look like this (running GStreamer in [client mode](https://www.freedesktop.org/software/gstreamer-sdk/data/docs/latest/gst-plugins-base-plugins-0.10/gst-plugins-base-plugins-tcpclientsink.html))
+Mopidy configuration would look like this (running GStreamer in [client mode](https://gstreamer.freedesktop.org/documentation/tcp/tcpclientsink.html))
 
 ```sh
 [audio]
@@ -196,7 +196,7 @@ Receives audio from a TCP socket (acting as client)
 tcp://<server IP, e.g. 127.0.0.1>:<port>?name=<name>&mode=client
 ```
 
-Mopidy configuration would look like this (running GStreamer in [server mode](https://www.freedesktop.org/software/gstreamer-sdk/data/docs/latest/gst-plugins-base-plugins-0.10/gst-plugins-base-plugins-tcpserversink.html)):
+Mopidy configuration would look like this (running GStreamer in [server mode](https://gstreamer.freedesktop.org/documentation/tcp/tcpserversink.html)):
 
 ```sh
 [audio]
