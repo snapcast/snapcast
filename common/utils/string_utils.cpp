@@ -30,6 +30,7 @@
 #include <cstdio>
 #include <iomanip>
 #include <map>
+#include <openssl/crypto.h>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -271,5 +272,15 @@ std::string tolower_copy(const std::string& s)
     std::string str(s);
     return tolower(str);
 }
+
+
+bool timing_safe_equals(const std::string a, const std::string b)
+{
+    if (a.length() != b.length()) {
+        return false;
+    }
+    return CRYPTO_memcmp(a.data(), b.data(), a.size()) == 0;
+}
+
 
 } // namespace utils::string
