@@ -60,6 +60,8 @@ private:
     std::vector<char> buffer_;
     std::chrono::time_point<std::chrono::steady_clock> next_request_;
     std::shared_ptr<::FILE> file_;
+    /// cleared by the destructor so a tick already queued on the io_context skips a dead player
+    std::shared_ptr<bool> alive_ = std::make_shared<bool>(true);
 };
 
 } // namespace player
