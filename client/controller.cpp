@@ -469,6 +469,10 @@ void Controller::reconnect()
     player_.reset();
     stream_.reset();
     decoder_.reset();
+    // A different server (or a reboot) can have a new monotonic clock origin.
+    // The initial quick sync must not be outvoted by the previous connection's
+    // 200-sample median. Stop the player before resetting its time reference.
+    TimeProvider::getInstance().reset();
     timer_.expires_after(1s);
     timer_.async_wait([this](const boost::system::error_code& ec)
     {

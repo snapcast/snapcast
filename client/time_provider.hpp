@@ -49,6 +49,8 @@ public:
 
     /// Set diff to server
     void setDiffToServer(double ms);
+    /// Discard samples from the previous server connection before synchronizing.
+    void reset();
     /// Set diff from round-trip-times client-to-server and server-to-client
     void setDiff(const tv& c2s, const tv& s2c);
 
