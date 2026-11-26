@@ -39,6 +39,12 @@ static constexpr auto LOG_TAG = "ControlSessionTCP";
 ControlSessionTcp::ControlSessionTcp(ControlMessageReceiver* receiver, tcp::socket&& socket, const ServerSettings& settings)
     : ControlSession(receiver, settings), socket_(std::move(socket)), strand_(boost::asio::make_strand(socket_.get_executor()))
 {
+    boost::system::error_code ec;
+    auto peer = socket_.remote_endpoint(ec);
+    peer_ = ec ? "unknown" : (peer.address().is_v6() ? "[" + peer.address().to_string() + "]" : peer.address().to_string()) + ":" + std::to_string(peer.port());
+    auto local = socket_.local_endpoint(ec);
+    local_ =
+        ec ? "unknown" : (local.address().is_v6() ? "[" + local.address().to_string() + "]" : local.address().to_string()) + ":" + std::to_string(local.port());
 }
 
 
@@ -53,11 +59,16 @@ void ControlSessionTcp::do_read()
 {
     const std::string delimiter = "\n";
     boost::asio::async_read_until(socket_, streambuf_, delimiter,
-                                  [this, self = shared_from_this(), delimiter](const std::error_code& ec, std::size_t bytes_transferred)
+                                  [this, self = shared_from_this(), delimiter](const boost::system::error_code& ec, std::size_t bytes_transferred)
     {
         if (ec)
         {
-            LOG(ERROR, LOG_TAG) << "Error while reading from control socket: " << ec.message() << "\n";
+            if (ec == boost::asio::error::eof)
+                LOG(INFO, LOG_TAG) << "Control peer " << peer_ << " closed connection to " << local_ << "\n";
+            else if (ec == boost::asio::error::operation_aborted)
+                LOG(DEBUG, LOG_TAG) << "Read canceled for control peer " << peer_ << " on " << local_ << "\n";
+            else
+                LOG(ERROR, LOG_TAG) << "Error reading control peer " << peer_ << " on " << local_ << ": " << ec.message() << "\n";
             return;
         }
 
@@ -91,14 +102,16 @@ void ControlSessionTcp::start()
 
 void ControlSessionTcp::stop()
 {
-    LOG(DEBUG, LOG_TAG) << "ControlSession::stop\n";
+    if (!socket_.is_open())
+        return;
+    LOG(DEBUG, LOG_TAG) << "Stopping control peer " << peer_ << " on " << local_ << "\n";
     boost::system::error_code ec;
     socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-    if (ec)
-        LOG(ERROR, LOG_TAG) << "Error in socket shutdown: " << ec.message() << "\n";
+    if (ec && ec != boost::asio::error::not_connected)
+        LOG(ERROR, LOG_TAG) << "Error shutting down control peer " << peer_ << " on " << local_ << ": " << ec.message() << "\n";
     socket_.close(ec);
     if (ec)
-        LOG(ERROR, LOG_TAG) << "Error in socket close: " << ec.message() << "\n";
+        LOG(ERROR, LOG_TAG) << "Error closing control peer " << peer_ << " on " << local_ << ": " << ec.message() << "\n";
     LOG(DEBUG, LOG_TAG) << "ControlSession ControlSession stopped\n";
 }
 
@@ -119,12 +132,16 @@ void ControlSessionTcp::sendAsync(const std::string& message)
 
 void ControlSessionTcp::send_next()
 {
-    boost::asio::async_write(socket_, boost::asio::buffer(messages_.front()), [this, self = shared_from_this()](std::error_code ec, std::size_t length)
+    boost::asio::async_write(socket_, boost::asio::buffer(messages_.front()),
+                             [this, self = shared_from_this()](boost::system::error_code ec, std::size_t length)
     {
         messages_.pop_front();
         if (ec)
         {
-            LOG(ERROR, LOG_TAG) << "Error while writing to control socket: " << ec.message() << "\n";
+            if (ec == boost::asio::error::operation_aborted)
+                LOG(DEBUG, LOG_TAG) << "Write canceled for control peer " << peer_ << " on " << local_ << "\n";
+            else
+                LOG(ERROR, LOG_TAG) << "Error writing control peer " << peer_ << " on " << local_ << ": " << ec.message() << "\n";
         }
         else
         {

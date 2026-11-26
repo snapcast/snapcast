@@ -168,6 +168,11 @@ jobs:
           # This regression checks invalid accesses, not existing shutdown leaks.
           ASAN_OPTIONS: detect_leaks=0
         run: python3 test/stream_removal_test.py ./bin/snapserver
+      - name: TCP control lifecycle regression (ASan)
+        if: matrix.sanitizer == 'asan'
+        env:
+          ASAN_OPTIONS: detect_leaks=0
+        run: python3 test/control_session_test.py ./bin/snapserver
 
 
   linux:
